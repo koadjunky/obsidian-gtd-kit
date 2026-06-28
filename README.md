@@ -19,13 +19,17 @@ Claude Code skill kit for GTD task management in Obsidian.
 
 ### 1. Install skills
 
-Clone this repo into your Claude Code plugins or skills directory:
+Via Claude Code plugin manager:
 
 ```bash
-git clone <repo-url> ~/.claude/skills/obsidian-gtd-kit
+claude plugins install github:koadjunky/obsidian-gtd-kit
 ```
 
-Or symlink `skills/` into whichever directory Claude Code loads skills from.
+Or manually:
+
+```bash
+git clone https://github.com/koadjunky/obsidian-gtd-kit.git ~/.claude/skills/obsidian-gtd-kit
+```
 
 ### 2. Capture script (hotkey)
 
