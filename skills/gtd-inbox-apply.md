@@ -10,7 +10,7 @@ Apply classified tasks from `Tasks/Classified.md` to their project files, then a
 
 ## Steps
 
-1. Read `~/Documents/Obsidian Vault/Tasks/Classified.md`. If missing or empty, report and stop.
+1. Read `~/Documents/Obsidian Vault/Tasks/Classified.md`. If missing or empty, tell the user `Tasks/Classified.md` is missing — run `/gtd-inbox-sweep` first — then stop.
 
 2. Parse all task lines (lines starting with `- [ ]`).
 
@@ -24,7 +24,7 @@ Apply classified tasks from `Tasks/Classified.md` to their project files, then a
 
 5. Clear `~/Documents/Obsidian Vault/Tasks/Capture.md` — write an empty file (or just a blank line).
 
-6. Move `Tasks/Classified.md` to `Archive/Classified-YYYY-MM-DD.md` (use today's date).
+6. Move `~/Documents/Obsidian Vault/Tasks/Classified.md` to `~/Documents/Obsidian Vault/Archive/Classified-YYYY-MM-DD.md` (use today's date).
 
 7. Report:
    - How many tasks appended to project files (list: project name → count)
