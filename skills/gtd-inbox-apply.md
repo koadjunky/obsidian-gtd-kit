@@ -1,10 +1,10 @@
 ---
-description: Apply Tasks/Classified.md to project files, clear inbox, archive
+description: Apply ~/Documents/Obsidian Vault/Tasks/Classified.md to project files, clear inbox, archive
 ---
 
 # GTD Inbox Apply
 
-Apply classified tasks from `Tasks/Classified.md` to their project files, then archive.
+Apply classified tasks from `~/Documents/Obsidian Vault/Tasks/Classified.md` to their project files, then archive.
 
 **Run this after reviewing `/gtd-inbox-sweep` output.**
 
