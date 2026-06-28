@@ -11,7 +11,9 @@ Classify all items in the Obsidian inbox and write structured tasks to `Classifi
 1. Read `~/Documents/Obsidian Vault/Tasks/Capture.md`. If file is empty or missing, report and stop.
 2. Read all `~/Documents/Obsidian Vault/Projects/*.md`. For each file, extract the content of any `## 🤖 Classifier hints` section.
 3. Classify each line using the rules below. Skip lines that are empty or start with `%%`.
-4. Write output to `~/Documents/Obsidian Vault/Tasks/Classified.md` with this header:
+4. Before writing, check if `~/Documents/Obsidian Vault/Tasks/Classified.md` already exists and is non-empty. If it does, warn the user: "Classified.md already exists and has unprocessed items — run `/gtd-inbox-apply` first, or confirm you want to overwrite." Stop unless the user confirms overwrite.
+
+   Write output to `~/Documents/Obsidian Vault/Tasks/Classified.md` with this header:
 
 ```
 # Classified YYYY-MM-DD
@@ -87,5 +89,5 @@ Replace placeholder names below with your real project names and keywords:
 ### Edge Cases
 
 - **Multiple tasks in one line** — emit one output line per task
-- **Unintelligible text** — keep verbatim as description, use `[[Projects/?]]`, add `> ⚠️ wymaga ręcznej klasyfikacji`
+- **Unintelligible text** — use the verbatim text as the description, omit `> oryginał:` (the description IS the original), use `[[Projects/?]]`, and add `> ⚠️ wymaga ręcznej klasyfikacji`
 - **Empty line or starts with `%%`** — skip entirely

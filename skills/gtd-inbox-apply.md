@@ -10,7 +10,7 @@ Apply classified tasks from `~/Documents/Obsidian Vault/Tasks/Classified.md` to 
 
 ## Steps
 
-1. Read `~/Documents/Obsidian Vault/Tasks/Classified.md`. If missing or empty, tell the user `Tasks/Classified.md` is missing — run `/gtd-inbox-sweep` first — then stop.
+1. Read `~/Documents/Obsidian Vault/Tasks/Classified.md`. If it does not exist, tell the user it is missing — run `/gtd-inbox-sweep` first — then stop. If it exists but is empty, tell the user it is empty — run `/gtd-inbox-sweep` first — then stop.
 
 2. Parse all task lines (lines starting with `- [ ]`).
 

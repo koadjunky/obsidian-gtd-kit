@@ -53,8 +53,8 @@ Configure these in `CLAUDE.md` for your actual projects. Example placeholders:
 
 | Hint | Resolves to |
 |------|-------------|
-| "dziś", "today", "asap" | capture date |
-| "jutro", "tomorrow" | capture date + 1 |
+| "dziś", "today", "asap" | sweep date (today) |
+| "jutro", "tomorrow" | tomorrow (sweep date + 1) |
 | "w piątek", "this friday" | next Friday |
 | "do końca tygodnia" | next Friday |
 | "do końca miesiąca" | last day of month |

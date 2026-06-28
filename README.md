@@ -29,11 +29,9 @@ Or symlink `skills/` into whichever directory Claude Code loads skills from.
 
 ### 2. Capture script (hotkey)
 
-`scripts/obsidian-capture.sh` is a symlink to `~/bin/obsidian-capture.sh`.
-Copy or symlink it to your `~/bin/`:
+`scripts/obsidian-capture.sh` in this repo is a symlink pointing to `~/bin/obsidian-capture.sh` on the original author's machine. New users must create their own capture script at `~/bin/obsidian-capture.sh` before using the symlink or copying from it. Once your script exists, make it executable:
 
 ```bash
-cp scripts/obsidian-capture.sh ~/bin/obsidian-capture.sh
 chmod +x ~/bin/obsidian-capture.sh
 ```
 
@@ -73,7 +71,7 @@ Items about deployment, CI/CD, Jenkins, pipeline fixes.
 ## Workflow
 
 ```
-Windows-C  →  obsidian-capture.sh  →  Tasks/Capture.md
+Super+C  →  obsidian-capture.sh  →  Tasks/Capture.md
                                               ↓
                                    /gtd-inbox-sweep
                                               ↓
