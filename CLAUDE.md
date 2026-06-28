@@ -18,8 +18,8 @@ All skills in this repo use the `/gtd-` prefix.
 
 | Skill | File | Purpose |
 |-------|------|---------|
-| `/gtd-inbox-sweep` | `skills/gtd-inbox-sweep.md` | Classify Capture.md → Classified.md |
-| `/gtd-inbox-apply` | `skills/gtd-inbox-apply.md` | Apply Classified.md to project files |
+| `/gtd-inbox-sweep` | `skills/gtd-inbox-sweep/SKILL.md` | Classify Capture.md → Classified.md |
+| `/gtd-inbox-apply` | `skills/gtd-inbox-apply/SKILL.md` | Apply Classified.md to project files |
 
 ## Naming Rules
 
