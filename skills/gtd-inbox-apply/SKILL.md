@@ -19,15 +19,18 @@ Apply classified tasks from `~/Documents/Obsidian Vault/Tasks/Classified.md` to 
    - Open `~/Documents/Obsidian Vault/Projects/PROJEKT.md`
    - If file has a `## Tasks` section, append the task line there
    - If no `## Tasks` section exists, append one at the end of the file and then add the task line
+   - Before appending, strip the project link (`[[Projects/PROJEKT|PROJEKT]]` or `[[Projects/PROJEKT]]`) from the task line
    - Strip the `> oryginał:` line before appending (keep only the `- [ ]` line)
 
 4. Collect all tasks with `[[Projects/?]]` and print them as a list for manual assignment. Do not write these anywhere — ask the user to assign them manually.
 
-5. Clear `~/Documents/Obsidian Vault/Tasks/Capture.md` — write an empty file (or just a blank line).
+5. In every project file that was modified in step 3, strip `#inbox` and `#today` tags from all completed tasks (lines starting with `- [x]`). Do not touch open tasks (`- [ ]`).
 
-6. Move `~/Documents/Obsidian Vault/Tasks/Classified.md` to `~/Documents/Obsidian Vault/Archive/Classified-YYYY-MM-DD.md` (use today's date).
+6. Clear `~/Documents/Obsidian Vault/Tasks/Capture.md` — write an empty file (or just a blank line).
 
-7. Report:
+7. Move `~/Documents/Obsidian Vault/Tasks/Classified.md` to `~/Documents/Obsidian Vault/Archive/Classified-YYYY-MM-DD.md` (use today's date).
+
+8. Report:
    - How many tasks appended to project files (list: project name → count)
    - How many tasks need manual assignment (`[[Projects/?]]`)
    - Confirm Capture.md cleared and Classified.md archived
