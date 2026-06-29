@@ -15,6 +15,7 @@ Apply classified tasks from `~/Documents/Obsidian Vault/Tasks/Classified.md` to 
 2. Parse all task lines (lines starting with `- [ ]`).
 
 3. For each task with a resolved project (not `[[Projects/?]]`):
+   - Parse project link — supports both `[[Projects/PROJEKT]]` and `[[Projects/PROJEKT|PROJEKT]]`; extract `PROJEKT` as the filename
    - Open `~/Documents/Obsidian Vault/Projects/PROJEKT.md`
    - If file has a `## Tasks` section, append the task line there
    - If no `## Tasks` section exists, append one at the end of the file and then add the task line

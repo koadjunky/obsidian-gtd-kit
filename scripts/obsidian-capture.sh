@@ -33,11 +33,14 @@ DATETIME=$(echo "$RESULT" | cut -d"$SEP" -f3)
 [ -z "$TASK" ] && exit 0
 
 # Zbuduj linię do inboxa
-LINE="- [ ] #inbox $TASK 🔗 $SOURCE ⏰ $TIME_ONLY 📅 $DATE_ONLY"
+LINE="- [ ] #inbox $TASK 🔗 $SOURCE ⏰ $TIME_ONLY ➕ $DATE_ONLY"
 
 # Upewnij się że plik istnieje
 mkdir -p "$(dirname "$INBOX")"
 touch "$INBOX"
+
+# Upewnij się że plik kończy się newline przed doklejeniem
+[ -s "$INBOX" ] && [ "$(tail -c1 "$INBOX" | wc -l)" -eq 0 ] && echo "" >> "$INBOX"
 
 echo "$LINE" >> "$INBOX"
 

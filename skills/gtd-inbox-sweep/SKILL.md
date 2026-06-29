@@ -25,16 +25,20 @@ Classify all items in the Obsidian inbox and write structured tasks to `Classifi
 
 ## Output Format
 
-For each classified item:
+For each classified item, preserve everything after 🔗 verbatim (source, ⏰ time, ➕ created date). Append the original task text at the end with 💬.
+
 ```
-- [ ] [[Projects/PROJEKT]] <actionable description> <priority emoji>
-  > oryginał: "<original text>"
+- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> <priority emoji> 🔗 <source> ⏰ <time> ➕ <date> 💬 <original task text>
 ```
 
-With optional fields:
+With optional due date (inserted before 🔗):
 ```
-- [ ] [[Projects/PROJEKT]] <actionable description> <priority emoji> 📅 YYYY-MM-DD
-  > oryginał: "<original text>"
+- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> <priority emoji> 📅 YYYY-MM-DD 🔗 <source> ⏰ <time> ➕ <date> 💬 <original task text>
+```
+
+If the original line has no 🔗 metadata, omit that section entirely:
+```
+- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> <priority emoji> 💬 <original task text>
 ```
 
 If multiple tasks were found in one original line, emit one output line per task.
@@ -67,11 +71,15 @@ Replace placeholder names below with your real project names and keywords:
 
 ### Due Date (`📅 YYYY-MM-DD`)
 
+**CRITICAL: Never guess weekday→date mapping. Always count days explicitly from today's date (available in context as `currentDate`). Off-by-one errors are common — verify before writing.**
+
+Example (today = 2026-06-29 Monday): wtorek = 2026-06-30, środa = 2026-07-01, czwartek = 2026-07-02, piątek = 2026-07-03.
+
 | Hint in original | Resolves to |
 |------------------|-------------|
 | "dziś", "today", "asap" | today's date |
 | "jutro", "tomorrow" | today + 1 day |
-| "w piątek", "this friday" | next Friday from today |
+| weekday name ("w piątek", "czwartek" etc.) | count forward from today to that weekday |
 | "do końca tygodnia" | next Friday from today |
 | "do końca miesiąca" | last day of current month |
 | explicit date in any format | normalize to YYYY-MM-DD |
@@ -89,5 +97,5 @@ Replace placeholder names below with your real project names and keywords:
 ### Edge Cases
 
 - **Multiple tasks in one line** — emit one output line per task
-- **Unintelligible text** — use the verbatim text as the description, omit `> oryginał:` (the description IS the original), use `[[Projects/?]]`, and add `> ⚠️ wymaga ręcznej klasyfikacji`
+- **Unintelligible text** — use verbatim text as description, omit 💬 suffix (description IS the original), use `[[Projects/?]]`, append `⚠️` at end of line
 - **Empty line or starts with `%%`** — skip entirely
