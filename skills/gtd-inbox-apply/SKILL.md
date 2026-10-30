@@ -10,11 +10,13 @@ Apply classified tasks from `~/Documents/Obsidian Vault/Tasks/Classified.md` to 
 
 ## Steps
 
-1. Read `~/Documents/Obsidian Vault/Tasks/Classified.md`. If it does not exist, tell the user it is missing — run `/gtd-inbox-sweep` first — then stop. If it exists but is empty, tell the user it is empty — run `/gtd-inbox-sweep` first — then stop.
+1. Read `~/Documents/Obsidian Vault/Tasks/Classified.md`. If it does not exist, tell the user it is missing — run `/gtd-inbox-sweep` first — then stop. If it exists but is empty, tell the user it is empty — run `/gtd-inbox-sweep` first — then stop. Always read it from disk: never reuse the version produced by `/gtd-inbox-sweep` earlier in the same session. The review step between sweep and apply is exactly where the user changes project assignments, so the in-context copy is stale.
 
-2. Parse all task lines (lines starting with `- [ ]`).
+2. If `Classified.md` contains `#today` tags, it was tagged in Obsidian during review, so Obsidian has it (and likely the project files) open with live buffers. Warn the user before applying: appended lines can come back reordered, duplicated, or already checked off (`- [x] … ✅ <date>`) when Obsidian flushes its buffer. Tagging `#today` after apply, in the project files, avoids it.
 
-3. For each task with a resolved project (not `[[Projects/?]]`):
+3. Parse all task lines (lines starting with `- [ ]`).
+
+4. For each task with a resolved project (not `[[Projects/?]]`):
    - Parse project link — supports both `[[Projects/PROJEKT]]` and `[[Projects/PROJEKT|PROJEKT]]`; extract `PROJEKT` as the filename
    - Open `~/Documents/Obsidian Vault/Projects/PROJEKT.md`
    - If file has a `## Tasks` section, append the task line there
@@ -22,18 +24,21 @@ Apply classified tasks from `~/Documents/Obsidian Vault/Tasks/Classified.md` to 
    - Before appending, strip the project link (`[[Projects/PROJEKT|PROJEKT]]` or `[[Projects/PROJEKT]]`) from the task line
    - Strip the `> oryginał:` line before appending (keep only the `- [ ]` line)
 
-4. Collect all tasks with `[[Projects/?]]` and print them as a list for manual assignment. Do not write these anywhere — ask the user to assign them manually.
+5. Verify every appended line actually landed: `grep -F` each line body in its project file. Obsidian may hold a stale in-memory buffer of a project file and overwrite appends made from the shell. If a line is missing, report it and stop before clearing `Capture.md`.
 
-5. In every project file that was modified in step 3, strip `#inbox` and `#today` tags from all completed tasks (lines starting with `- [x]`). Do not touch open tasks (`- [ ]`).
+6. Collect all tasks with `[[Projects/?]]` and print them as a list for manual assignment. Do not write these anywhere — ask the user to assign them manually.
 
-6. Clear `~/Documents/Obsidian Vault/Tasks/Capture.md` — write an empty file (or just a blank line).
+7. In every project file that was modified in step 4, strip `#inbox` and `#today` tags from all completed tasks (lines starting with `- [x]`). Do not touch open tasks (`- [ ]`).
 
-7. Move `~/Documents/Obsidian Vault/Tasks/Classified.md` to `~/Documents/Obsidian Vault/Archive/Classified-YYYY-MM-DD.md` (use today's date).
+8. Clear `~/Documents/Obsidian Vault/Tasks/Capture.md` — write an empty file (or just a blank line).
 
-8. Report:
+9. Move `~/Documents/Obsidian Vault/Tasks/Classified.md` to `~/Documents/Obsidian Vault/Archive/Classified-YYYY-MM-DD.md` (use today's date).
+
+10. Report:
    - How many tasks appended to project files (list: project name → count)
    - How many tasks need manual assignment (`[[Projects/?]]`)
    - Confirm Capture.md cleared and Classified.md archived
+   - Warn the user to reload the modified project files in Obsidian
 
 ## Notes
 

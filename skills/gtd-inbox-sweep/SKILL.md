@@ -25,20 +25,22 @@ Classify all items in the Obsidian inbox and write structured tasks to `Classifi
 
 ## Output Format
 
-For each classified item, preserve everything after 🔗 verbatim (source, ⏰ time, ➕ created date). Append the original task text at the end with 💬.
+For each classified item, preserve the 🔗 source and ⏰ time verbatim, then the original task text with 💬. Move the ➕ created date from the capture line to the end of the output line.
+
+**CRITICAL: Tasks plugin fields (priority, ➕, 📅) must be the very last thing on the line, in this order.** The plugin parses them from the end of the line and stops at the first other text, and 🔗, ⏰ and 💬 are not fields. A field placed before them is silently ignored and the task drops out of date and priority queries.
 
 ```
-- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> <priority emoji> 🔗 <source> ⏰ <time> ➕ <date> 💬 <original task text>
+- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> 🔗 <source> ⏰ <time> 💬 <original task text> <priority emoji> ➕ <date>
 ```
 
-With optional due date (inserted before 🔗):
+With optional due date (always last):
 ```
-- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> <priority emoji> 📅 YYYY-MM-DD 🔗 <source> ⏰ <time> ➕ <date> 💬 <original task text>
+- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> 🔗 <source> ⏰ <time> 💬 <original task text> <priority emoji> ➕ <date> 📅 YYYY-MM-DD
 ```
 
 If the original line has no 🔗 metadata, omit that section entirely:
 ```
-- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> <priority emoji> 💬 <original task text>
+- [ ] [[Projects/PROJEKT|PROJEKT]] <actionable description> 💬 <original task text> <priority emoji>
 ```
 
 If multiple tasks were found in one original line, emit one output line per task.
@@ -92,10 +94,10 @@ Example (today = 2026-06-29 Monday): wtorek = 2026-06-30, środa = 2026-07-01, c
 | ⏫ | pilne, urgent, asap, krytyczne, blocker, must |
 | 🔼 | ważne, important, should — **or no hint (default)** |
 | 🔽 | kiedyś, nice to have, could, przy okazji |
-| ⬇️ | nie teraz, wont, odłóż, skip |
+| ⏬ | nie teraz, wont, odłóż, skip |
 
 ### Edge Cases
 
 - **Multiple tasks in one line** — emit one output line per task
-- **Unintelligible text** — use verbatim text as description, omit 💬 suffix (description IS the original), use `[[Projects/?]]`, append `⚠️` at end of line
+- **Unintelligible text** — use verbatim text as description, omit 💬 suffix (description IS the original), use `[[Projects/?]]`, append `⚠️` after the description, before any 🔗 section and the Tasks plugin fields
 - **Empty line or starts with `%%`** — skip entirely

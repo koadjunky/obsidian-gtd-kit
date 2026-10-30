@@ -78,7 +78,6 @@ All skills in this repo use the `/gtd-` prefix.
 
 - Never use real company or client names in this repo (docs, examples, skill prompts)
 - Placeholder companies: Initech, Cyberdyne, Weyland, Umbrella, Tyrell
-- See `~/Work/Claude/CLAUDE.md` for the global rule
 
 ## Project File Format
 

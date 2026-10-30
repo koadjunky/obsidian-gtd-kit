@@ -68,7 +68,7 @@ Configure these in `CLAUDE.md` for your actual projects. Example placeholders:
 | ⏫ | pilne, urgent, asap, krytyczne, blocker, must |
 | 🔼 | ważne, important, should, or **no hint** (default) |
 | 🔽 | kiedyś, nice to have, could, przy okazji |
-| ⬇️ | nie teraz, wont, odłóż, skip |
+| ⏬ | nie teraz, wont, odłóż, skip |
 
 ## Edge Cases
 
